@@ -1,0 +1,55 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import LoginPage from './pages/LoginPage';
+import ForgetPage from './pages/ForgetPage';
+import AdminLayout from './layouts/AdminLayout';
+import DashboardPage from './pages/DashboardPage';
+import { Toaster } from 'react-hot-toast';
+
+export default function App() {
+  return (
+    <div className="w-full h-dvh overflow-auto" data-theme="light">
+      <Toaster />
+      <BrowserRouter>
+        <Routes>
+          {/* Layout 1 */}
+          <Route path="/">
+            <Route path="login" element={<LoginPage />} />
+            <Route path="forget" element={<ForgetPage />} />
+          </Route>
+
+          {/* Layout 2 */}
+
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<DashboardPage />} />
+            <Route path="staff" element={<h1>Staff Page</h1>} />
+            <Route path="menu" element={<h1>Menu Page</h1>} />
+            <Route path="sales" element={<h1>Sales Page</h1>} />
+          </Route>
+
+          {/* Layout 3 */}
+
+          <Route path="/cashier" element={<h1>Cashier Screen</h1>}>
+            <Route path="food" />
+            <Route path="dessert" />
+            <Route path="drinks" />
+            <Route path="sides" />
+          </Route>
+          {/* Layout 4 */}
+          <Route path="/orders">
+            <Route path="inside" />
+            <Route path="outside" />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
+}
+
+// 4 Layouts
+// Login - Forget Password
+
+// Admin Panel (Dashboard- staff - menu - sales)
+
+// Cahsier Panel (food - dessert - drinks - sides)
+
+// Resturant (inside - outside)
