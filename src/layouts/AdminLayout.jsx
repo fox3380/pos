@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import axios from 'axios';
 
 export default function AdminLayout() {
-  // محتاج اكتب كود js Logic بس خايف يعمل مشكلة في اول  Render
+  // محتاج اكتب كود js Logic بس خايف يعمل مشكلة في اول Render
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,12 +19,12 @@ export default function AdminLayout() {
       axios
         .get(url, { headers: { Authorization: `Bearer ${token}` } })
         .then((res) => {
-          if (res.data.user.syste_role != 'Admin') {
+          if (res.data.system_role != 'Admin') {
             alert('اطلع بره يلا ديه المكان بتاع ال Admin');
+            navigate('/login');
           }
         })
-        .catch((err) => {
-          alert('انت جاي تستظرف يلا');
+        .catch(() => {
           localStorage.clear();
           navigate('/login');
         });
@@ -41,8 +41,6 @@ export default function AdminLayout() {
         <main className="flex-1 h-full overflow-y-auto bg-white">
           <Outlet />
         </main>
-
-        <OrderPanel />
       </div>
     </div>
   );

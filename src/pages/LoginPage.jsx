@@ -36,7 +36,7 @@ export default function LoginPage() {
           navigate('/inside');
         }
       })
-      .catch((err) => {
+      .catch(() => {
         toast.error('Wrong email or password');
       });
   
