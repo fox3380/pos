@@ -13,25 +13,20 @@ export default function LoginPage() {
     email: Yup.string().required().email(),
     password: Yup.string().required(),
   });
-
+  
   const handleLogin = (values) => {
-    // مؤقتًا للتجربة فقط: افتح صفحة الكاشير مباشرة
-    navigate('/cashier');
-    return;
-
-    // الكود الأصلي خليته موجود، لكن لن يعمل بسبب return فوق
     let data = { identifier: values.email, password: values.password };
-
+  
     let domain = 'https://pos.skyready.online/api/';
     let endPoint = 'auth/local';
     let url = domain + endPoint;
-
+  
     axios
       .post(url, data)
       .then((res) => {
         let jwt = res.data.jwt;
         localStorage.setItem('token', jwt);
-
+  
         let user = res.data.user;
         if (user.system_role == 'Admin') {
           navigate('/admin');
@@ -44,7 +39,7 @@ export default function LoginPage() {
       .catch((err) => {
         toast.error('Wrong email or password');
       });
-
+  
     console.log(data);
   };
 
