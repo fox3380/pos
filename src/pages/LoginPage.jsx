@@ -3,6 +3,7 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
+
 export default function LoginPage() {
   const navigate = useNavigate();
 
@@ -14,6 +15,11 @@ export default function LoginPage() {
   });
 
   const handleLogin = (values) => {
+    // مؤقتًا للتجربة فقط: افتح صفحة الكاشير مباشرة
+    navigate('/cashier');
+    return;
+
+    // الكود الأصلي خليته موجود، لكن لن يعمل بسبب return فوق
     let data = { identifier: values.email, password: values.password };
 
     let domain = 'https://pos.skyready.online/api/';
@@ -38,6 +44,7 @@ export default function LoginPage() {
       .catch((err) => {
         toast.error('Wrong email or password');
       });
+
     console.log(data);
   };
 
@@ -49,27 +56,43 @@ export default function LoginPage() {
             <div className="w-14 h-14 rounded-2xl bg-emerald-500 rotate-6 flex items-center justify-center shadow-md">
               <span className="text-white text-2xl font-bold -rotate-6">G</span>
             </div>
+
             <h1 className="text-2xl font-bold text-gray-800">Staff Access</h1>
             <p className="text-sm text-gray-500">Welcome back, enter your credentials</p>
           </div>
 
           <div className="flex flex-col gap-1">
             <label className="text-xs font-semibold text-emerald-600 tracking-widest">STAFF ID</label>
+
             <div className="relative">
               <Field
                 name="email"
                 placeholder="Enter ID"
                 className="w-full px-4 py-3 pr-10 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-emerald-400 text-gray-700 placeholder-gray-400"
               />
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 absolute right-3 top-1/2 -translate-y-1/2 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-5 h-5 absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                />
               </svg>
             </div>
+
             <ErrorMessage name="email" className="text-red-500 text-xs" component={'p'} />
           </div>
 
           <div className="flex flex-col gap-1">
             <label className="text-xs font-semibold text-emerald-600 tracking-widest">PIN CODE</label>
+
             <div className="relative">
               <Field
                 name="password"
@@ -77,14 +100,30 @@ export default function LoginPage() {
                 placeholder="••••"
                 className="w-full px-4 py-3 pr-10 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-emerald-400 text-gray-700 placeholder-gray-400 tracking-widest"
               />
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 absolute right-3 top-1/2 -translate-y-1/2 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 11c1.1 0 2-.9 2-2V7a2 2 0 10-4 0v2c0 1.1.9 2 2 2zm6 0h-1V7a5 5 0 10-10 0v4H6a2 2 0 00-2 2v7a2 2 0 002 2h12a2 2 0 002-2v-7a2 2 0 00-2-2z" />
+
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-5 h-5 absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 11c1.1 0 2-.9 2-2V7a2 2 0 10-4 0v2c0 1.1.9 2 2 2zm6 0h-1V7a5 5 0 10-10 0v4H6a2 2 0 00-2 2v7a2 2 0 002 2h12a2 2 0 002-2v-7a2 2 0 00-2-2z"
+                />
               </svg>
             </div>
+
             <ErrorMessage name="password" className="text-red-500 text-xs" component={'p'} />
           </div>
 
-          <button type="submit" className="w-full py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-medium shadow-md transition">
+          <button
+            type="submit"
+            className="w-full py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-medium shadow-md transition"
+          >
             Sign In
           </button>
 
@@ -93,6 +132,7 @@ export default function LoginPage() {
           </Link>
         </Form>
       </Formik>
+
       <p className="mt-6 text-xs text-emerald-600 tracking-widest flex items-center gap-2">
         <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
         SYSTEM SECURE & LIVE

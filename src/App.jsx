@@ -3,41 +3,38 @@ import LoginPage from './pages/LoginPage';
 import ForgetPage from './pages/ForgetPage';
 import AdminLayout from './layouts/AdminLayout';
 import DashboardPage from './pages/DashboardPage';
+import CashierPage from './pages/CashierPage';
+
+import CashierFoodPage from './pages/cashier/CashierFoodPage';
+import CashierDrinksPage from './pages/cashier/CashierDrinksPage';
+import CashierSweetsPage from './pages/cashier/CashierSweetsPage';
+import CashierSidesPage from './pages/cashier/CashierSidesPage';
+
 import { Toaster } from 'react-hot-toast';
 
 export default function App() {
   return (
-    <div className="w-full h-dvh overflow-auto" data-theme="light">
+    <div className="w-full min-h-dvh overflow-auto" data-theme="light">
       <Toaster />
+
       <BrowserRouter>
         <Routes>
-          {/* Layout 1 */}
           <Route path="/">
+            <Route index element={<LoginPage />} />
             <Route path="login" element={<LoginPage />} />
             <Route path="forget" element={<ForgetPage />} />
           </Route>
 
-          {/* Layout 2 */}
-
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<DashboardPage />} />
-            <Route path="staff" element={<h1>Staff Page</h1>} />
-            <Route path="menu" element={<h1>Menu Page</h1>} />
-            <Route path="sales" element={<h1>Sales Page</h1>} />
           </Route>
 
-          {/* Layout 3 */}
-
-          <Route path="/cashier" element={<h1>Cashier Screen</h1>}>
-            <Route path="food" />
-            <Route path="dessert" />
-            <Route path="drinks" />
-            <Route path="sides" />
-          </Route>
-          {/* Layout 4 */}
-          <Route path="/orders">
-            <Route path="inside" />
-            <Route path="outside" />
+          <Route path="/cashier" element={<CashierPage />}>
+            <Route index element={<CashierFoodPage />} />
+            <Route path="food" element={<CashierFoodPage />} />
+            <Route path="drinks" element={<CashierDrinksPage />} />
+            <Route path="sweets" element={<CashierSweetsPage />} />
+            <Route path="sides" element={<CashierSidesPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
@@ -48,8 +45,9 @@ export default function App() {
 // 4 Layouts
 // Login - Forget Password
 
-// Admin Panel (Dashboard- staff - menu - sales)
+// Admin Panel (Dashboard - menu - drinks - sweets - sales)
 
 // Cahsier Panel (food - dessert - drinks - sides)
 
 // Resturant (inside - outside)
+
