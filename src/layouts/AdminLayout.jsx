@@ -3,6 +3,7 @@ import SideMenu from '../components/SideMenu';
 
 import { useEffect } from 'react';
 import axios from 'axios';
+import { domain } from '../store';
 
 export default function AdminLayout() {
   // محتاج اكتب كود js Logic بس خايف يعمل مشكلة في اول Render
@@ -12,8 +13,7 @@ export default function AdminLayout() {
     let token = localStorage.getItem('token');
     if (token) {
       // مبروك حضرتك عامل Login وينفع تخش المسارات ديه كلها
-      let domain = 'https://pos.skyready.online/api/';
-      let endPoint = 'users/me';
+      let endPoint = '/api/users/me';
       let url = domain + endPoint;
 
       axios

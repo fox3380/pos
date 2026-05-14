@@ -20,10 +20,14 @@ export default function ProductGrid({ pageTitle, products }) {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 lg:gap-7">
-        {products.map((item) => (
+        {products?.map((item) => (
           <ProductCard key={item.id} item={item} />
         ))}
       </div>
     </section>
   );
 }
+
+
+// State Local (in Each Component into Componenet Scooooope )
+// Global State (Store Any Compoenet can CRUD)

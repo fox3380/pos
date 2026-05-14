@@ -4,11 +4,11 @@ import { TbChefHat } from 'react-icons/tb';
 import { LuLogOut } from 'react-icons/lu';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { domain } from '../../store';
 
 export default function CashierSidebar() {
-  let domain = 'https://pos.skyready.online';
+
   const [categories, setCategories] = useState([]);
-  // const navClass = ({ isActive }) => `group min-w-16 lg:w-14 h-16 rounded-2xl flex flex-col items-center justify-center gap-1 transition duration-300 hover:-translate-y-1 ${isActive ? 'bg-emerald-50 text-emerald-500 shadow-md shadow-emerald-100' : 'text-slate-300 hover:bg-emerald-50 hover:text-emerald-500'}`;
   const linkStyle = ` group min-w-16 lg:w-14 h-16 py-4 rounded-2xl flex flex-col items-center justify-center gap-1 transition duration-300 hover:-translate-y-1 `;
   useEffect(() => {
     let endPoint = '/api/categories?populate=*';
@@ -28,10 +28,10 @@ export default function CashierSidebar() {
           <TbChefHat className="text-[24px]" />
         </div>
 
-        <nav dir='rtl' className="flex  lg:h-10 overflow-auto lg:grow lg:flex-col items-center gap-3 lg:gap-6 overflow-x-auto w-full lg:w-auto pb-1 lg:pb-0">
+        <nav dir="rtl" className="flex  lg:h-10 overflow-auto lg:grow lg:flex-col items-center gap-3 lg:gap-6 overflow-x-auto w-full lg:w-auto pb-1 lg:pb-0">
           {categories.map((el) => {
             return (
-              <NavLink end key={el.documentId} to={el.documentId} className={({isActive}) => linkStyle + (isActive? ' bg-emerald-50 text-emerald-500 shadow-md shadow-emerald-100' : 'text-slate-300 hover:bg-emerald-50 hover:text-emerald-500')}>
+              <NavLink end key={el.documentId} to={el.documentId} className={({ isActive }) => linkStyle + (isActive ? ' bg-emerald-50 text-emerald-500 shadow-md shadow-emerald-100' : 'text-slate-300 hover:bg-emerald-50 hover:text-emerald-500')}>
                 <img className="w-full h-5 object-contain" src={el.icon ? domain + el.icon?.url : noCat} />
                 <span className="text-[9px] font-bold">{el.name}</span>
               </NavLink>
@@ -46,7 +46,3 @@ export default function CashierSidebar() {
     </aside>
   );
 }
-
-
-
-5 + (7 * 9)

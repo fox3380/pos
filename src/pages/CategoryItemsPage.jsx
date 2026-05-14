@@ -2,19 +2,23 @@ import { useEffect, useState } from 'react';
 import ProductGrid from '../components/cashier/ProductGrid';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { domain } from '../store';
 
 export default function CategoryItemsPage() {
-  let domain = 'https://pos.skyready.online';
+
   const params = useParams();
+  const [catName, setCatName] = useState('');
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     let catId = params.categoryId;
-    axios.get(domain + `/api/categories/${catId}?populate=*`).then((res) => {
+    let url = domain + `/api/categories/${catId}`;
+    axios.get(url, { params: { populate: { items: { populate: '*' } } } }).then((res) => {
+      console.log(res.data.data);
       setProducts(res.data.data.items);
-      console.log(res.data);
+      setCatName(res.data.data.name);
     });
   }, [params]);
 
-  return <ProductGrid pageTitle="Drinks" products={products} />;
+  return <ProductGrid pageTitle={catName} products={products} />;
 }

@@ -3,7 +3,6 @@ import LoginPage from './pages/LoginPage';
 import ForgetPage from './pages/ForgetPage';
 import AdminLayout from './layouts/AdminLayout';
 import DashboardPage from './pages/DashboardPage';
-import CashierFoodPage from './pages/cashier/CashierFoodPage';
 import { Toaster } from 'react-hot-toast';
 import CashierLayout from './layouts/CashierLayout';
 import CategoryItemsPage from './pages/CategoryItemspage';
@@ -28,7 +27,6 @@ export default function App() {
             <Route index element={<h1>Cahsier Dashboard</h1>} />
             <Route path=":categoryId" element={<CategoryItemsPage />} />
           </Route>
-
         </Routes>
       </BrowserRouter>
     </div>
