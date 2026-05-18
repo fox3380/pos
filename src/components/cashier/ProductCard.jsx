@@ -1,16 +1,24 @@
-import { domain, useCart } from "../../store";
+import { domain, useCart } from '../../store';
 
 export default function ProductCard({ item }) {
   // const [cart,useCart] = useState([]);
 
-  const {cart,setCart} = useCart();
+  const { cart, setCart } = useCart();
 
-  const addToCart = ()=>{
-    // object push into Array
-    setCart([ ...cart , item]);
-    // Global State cart
-    console.log(' I will Add the Item to the Cart ' , item);
-  }
+  const addToCart = () => {
+    let newItem = { ...item, qty: 1 };
+    let id = newItem.documentId;
+    let itemIndex = cart.findIndex((el) => {
+      return el.documentId == id;
+    });
+    if (itemIndex == -1) {
+      setCart([...cart, newItem]);
+    } else {
+      let copy = [...cart];
+      copy[itemIndex].qty++;
+      setCart(copy);
+    }
+  };
   return (
     <div className="group bg-white rounded-[26px] p-3 border border-slate-100 shadow-sm transition duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-emerald-100">
       <div className="w-full h-[180px] sm:h-[190px] rounded-[22px] overflow-hidden bg-slate-50">
@@ -25,7 +33,9 @@ export default function ProductCard({ item }) {
         <div className="flex items-center justify-between mt-auto pt-4">
           <span className="text-emerald-500 font-bold text-sm">${item.price.toFixed(2)}</span>
 
-          <button onClick={addToCart} className="w-8 h-8 rounded-xl bg-emerald-500 text-white text-lg leading-none shadow-md transition duration-300 hover:bg-emerald-600 hover:scale-110 active:scale-95">+</button>
+          <button onClick={addToCart} className="w-8 h-8 rounded-xl bg-emerald-500 text-white text-lg leading-none shadow-md transition duration-300 hover:bg-emerald-600 hover:scale-110 active:scale-95">
+            +
+          </button>
         </div>
       </div>
     </div>

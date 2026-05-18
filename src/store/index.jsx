@@ -7,3 +7,7 @@ export const useCart = create((set) => ({
   setCart: (newValue) => set(() => ({ cart: newValue })),
 }));
 
+export const useModal = create((set) => ({
+  modalIndex: false,
+  setModalIndex: (newValue) => set(() => ({ modalIndex: newValue })),
+}));

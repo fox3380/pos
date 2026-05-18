@@ -1,6 +1,58 @@
 import { BsTrash3 } from 'react-icons/bs';
+import { domain, useCart, useModal } from '../../store';
+import { useEffect, useState } from 'react';
 
-export default function OrderPanel({ orderItems, increaseQuantity, decreaseQuantity, clearOrder, subtotal, tax, total }) {
+export default function OrderPanel() {
+  // total sub , tax
+  const [subTotal, setSubTotal] = useState(0);
+  const [tax, setTax] = useState(0);
+  const [total, setTotal] = useState(0);
+
+  // cart
+  const { cart, setCart } = useCart();
+  const { setModalIndex } = useModal();
+
+  const increaseQuantity = (id) => {
+    let itemIndex = cart.findIndex((el) => {
+      return el.documentId == id;
+    });
+    let copy = [...cart];
+    copy[itemIndex].qty++;
+    setCart(copy);
+  };
+
+  const decreaseQuantity = (id) => {
+    let itemIndex = cart.findIndex((el) => {
+      return el.documentId == id;
+    });
+    let copy = [...cart];
+    if (copy[itemIndex].qty == 1) {
+      copy.splice(itemIndex, 1);
+    } else {
+      copy[itemIndex].qty--;
+    }
+
+    setCart(copy);
+  };
+
+  const clearOrder = () => {
+    setCart([]);
+  };
+
+  // كل ما ال Cart تتعدل عاوز انفذ كود معين
+
+  useEffect(() => {
+    let sub = 0;
+    cart.forEach((el) => {
+      sub = sub + el.price * el.qty;
+    });
+
+    let newTax = 0.14 * sub;
+    setSubTotal(sub);
+    setTax(newTax);
+    setTotal(newTax + sub);
+  }, [cart]);
+
   return (
     <aside className="w-full lg:w-[330px] lg:h-dvh border-t lg:border-t-0 lg:border-l border-slate-100 bg-white flex flex-col shrink-0">
       <div className="min-h-[70px] px-4 sm:px-6 lg:px-7 flex items-center justify-between shrink-0">
@@ -20,29 +72,29 @@ export default function OrderPanel({ orderItems, increaseQuantity, decreaseQuant
       </div>
 
       <div className="flex-1 px-4 sm:px-6 lg:px-7 pt-7 lg:pt-9 space-y-5 overflow-y-auto max-h-[360px] lg:max-h-none">
-        {orderItems.length === 0 ? (
+        {cart.length === 0 ? (
           <p className="text-xs text-slate-300 text-center pt-12">No items in order</p>
         ) : (
-          orderItems.map((item) => (
+          cart.map((item) => (
             <div key={item.id} className="flex items-center gap-4 transition duration-300 hover:-translate-y-0.5">
               <div className="w-12 h-12 rounded-2xl bg-slate-100 shrink-0 overflow-hidden">
-                <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                <img src={domain + item.img?.url} alt={item.name} className="w-full h-full object-cover" />
               </div>
 
               <div className="flex-1 min-w-0">
                 <h4 className="text-xs font-bold text-slate-900 leading-tight truncate">{item.name}</h4>
 
-                <p className="text-xs font-bold text-emerald-500 mt-1">${item.price.toFixed(2)}</p>
+                <p className="text-xs font-bold text-emerald-500 mt-1">${item.price.toFixed(2) * item.qty}</p>
               </div>
 
               <div className="h-8 px-3 rounded-xl bg-slate-50 flex items-center gap-3 transition duration-300 hover:bg-emerald-50">
-                <button onClick={() => decreaseQuantity(item.id)} className="text-slate-400 text-sm transition hover:text-rose-400 active:scale-90">
+                <button onClick={() => decreaseQuantity(item.documentId)} className="text-slate-400 text-sm transition hover:text-rose-400 active:scale-90">
                   −
                 </button>
 
-                <span className="text-xs font-bold text-slate-700">{item.quantity}</span>
+                <span className="text-xs font-bold text-slate-700">{item.qty}</span>
 
-                <button onClick={() => increaseQuantity(item.id)} className="text-emerald-500 text-sm transition hover:scale-125 active:scale-90">
+                <button onClick={() => increaseQuantity(item.documentId)} className="text-emerald-500 text-sm transition hover:scale-125 active:scale-90">
                   +
                 </button>
               </div>
@@ -56,7 +108,7 @@ export default function OrderPanel({ orderItems, increaseQuantity, decreaseQuant
           <div className="flex items-center justify-between">
             <span className="text-[10px] font-bold tracking-widest text-slate-300">SUBTOTAL</span>
 
-            <span className="text-xs font-bold text-slate-700">${subtotal.toFixed(2)}</span>
+            <span className="text-xs font-bold text-slate-700">${subTotal.toFixed(2)}</span>
           </div>
 
           <div className="flex items-center justify-between">
@@ -72,7 +124,9 @@ export default function OrderPanel({ orderItems, increaseQuantity, decreaseQuant
           <span className="text-2xl font-black text-emerald-500 transition duration-300 hover:scale-105">${total.toFixed(2)}</span>
         </div>
 
-        <button className="w-full h-12 rounded-2xl bg-emerald-500 text-white text-[10px] font-bold tracking-[0.18em] shadow-md transition duration-300 hover:bg-emerald-600 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-emerald-100 active:scale-[0.98]">PROCEED TO CHECKOUT →</button>
+        <button onClick={() => setModalIndex(true)} className="w-full h-12 rounded-2xl bg-emerald-500 text-white text-[10px] font-bold tracking-[0.18em] shadow-md transition duration-300 hover:bg-emerald-600 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-emerald-100 active:scale-[0.98]">
+          PROCEED TO CHECKOUT →
+        </button>
       </div>
     </aside>
   );

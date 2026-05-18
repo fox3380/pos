@@ -4,9 +4,12 @@ import CashierSidebar from '../components/cashier/CashierSidebar';
 import CashierTopBar from '../components/cashier/CashierTopBar';
 import OrderPanel from '../components/cashier/OrderPanel';
 import axios from 'axios';
-import { domain, useCart } from '../store/index';
+import { domain, useCart, useModal } from '../store/index';
+import Modal from '../components/Modal';
 
 export default function CashierLayout() {
+  const { modalIndex } = useModal();
+
   const navigate = useNavigate();
   const { cart } = useCart();
 
@@ -47,6 +50,8 @@ export default function CashierLayout() {
       </main>
 
       <OrderPanel orderItems={cart} subtotal={subtotal} tax={tax} total={total} />
+
+      {modalIndex && <Modal />}
     </div>
   );
 }
