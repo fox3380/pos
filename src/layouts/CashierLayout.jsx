@@ -29,6 +29,8 @@ export default function CashierLayout() {
           if (res.data.system_role == 'Restaurant') {
             alert('اطلع بره يلا ديه المكان بتاع ال Admin or Cashier');
             navigate('/login');
+          } else {
+            sessionStorage.setItem('User', JSON.stringify(res.data));
           }
         })
         .catch(() => {

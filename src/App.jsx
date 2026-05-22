@@ -6,6 +6,7 @@ import DashboardPage from './pages/DashboardPage';
 import { Toaster } from 'react-hot-toast';
 import CashierLayout from './layouts/CashierLayout';
 import CategoryItemsPage from './pages/CategoryItemspage';
+import InsidePage from './pages/InsidePage';
 
 export default function App() {
   return (
@@ -26,6 +27,11 @@ export default function App() {
           <Route path="/cashier" element={<CashierLayout />}>
             <Route index element={<h1>Cahsier Dashboard</h1>} />
             <Route path=":categoryId" element={<CategoryItemsPage />} />
+          </Route>
+
+          <Route path="/resturant">
+            <Route path="inside" element={<InsidePage />} />
+            <Route path="outside" />
           </Route>
         </Routes>
       </BrowserRouter>
