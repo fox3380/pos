@@ -7,6 +7,7 @@ import { Toaster } from 'react-hot-toast';
 import CashierLayout from './layouts/CashierLayout';
 import CategoryItemsPage from './pages/CategoryItemspage';
 import InsidePage from './pages/InsidePage';
+import OutSidePage from './pages/OutSidePage';
 
 export default function App() {
   return (
@@ -31,7 +32,7 @@ export default function App() {
 
           <Route path="/resturant">
             <Route path="inside" element={<InsidePage />} />
-            <Route path="outside" />
+            <Route path="outside" element={<OutSidePage />} />
           </Route>
         </Routes>
       </BrowserRouter>
@@ -48,3 +49,7 @@ export default function App() {
 // Nested
 // Protected
 // Dynamic Route
+// Reporting
+// 1- اجمالي المبيعات اليومية
+// 500 order filter created_at
+// 

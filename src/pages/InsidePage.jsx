@@ -4,8 +4,6 @@ import { domain } from '../store';
 import toast from 'react-hot-toast';
 
 export default function InsidePage() {
-  // Orders Under Process ليست كل Orrrdeeer
-  // Filllllllllter مباشرة من ال ء Backend
   const [orders, setOrders] = useState([]);
 
   const getOrders = () => {
