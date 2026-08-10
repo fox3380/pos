@@ -1,19 +1,57 @@
-# React + Vite
+# 🧾 POS System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern Point of Sale (POS) system built with React and Vite,
+designed to simplify daily sales and cashier operations.
 
-Currently, two official plugins are available:
+## 🚀 Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+[View Live Demo](PUT_YOUR_LIVE_LINK_HERE)
 
-## React Compiler
+## 🔐 Demo Account
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+> This account is provided for project evaluation purposes only.
 
-## Expanding the ESLint configuration
+**Email:** `cashier@icloud.com`  
+**Password:** `Admin@123`
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## ✨ Features
+
+- 🔐 Authentication
+- 📊 Dashboard
+- 🛒 Cashier / POS
+- 📦 Product Management
+- 🗂️ Category Management
+- 🔄 Page Navigation
+- 🎨 Responsive UI
+- 🧩 Reusable React Components
+
+## 🛠️ Tech Stack
+
+- React
+- Vite
+- JavaScript
+- CSS
+- Git & GitHub
+
+## 📁 Project Structure
+
+```text
+src/
+├── assets/
+├── components/
+├── layouts/
+├── pages/
+│   ├── cashier/
+│   ├── CategoryItemsPage.jsx
+│   ├── DashboardPage.jsx
+│   ├── ForgetPage.jsx
+│   ├── InsidePage.jsx
+│   ├── LoginPage.jsx
+│   └── OutSidePage.jsx
+├── store/
+├── App.jsx
+├── index.css
+└── main.jsx
 
  Email: cashier@icloud.com
 Password: Admin@123
