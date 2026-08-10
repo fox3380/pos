@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import { domain } from '../store';
 
 const demoAccounts = [
-  { label: 'Cashier', email: 'casher@icloud.com', password: 'Admin@123', icon: '💰' },
+  { label: 'Cashier', email: 'cashier@icloud.com', password: 'Admin@123', icon: '💰' },
 ];
 
 function DemoBox() {
