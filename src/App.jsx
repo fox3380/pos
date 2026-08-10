@@ -5,7 +5,7 @@ import AdminLayout from './layouts/AdminLayout';
 import DashboardPage from './pages/DashboardPage';
 import { Toaster } from 'react-hot-toast';
 import CashierLayout from './layouts/CashierLayout';
-import CategoryItemsPage from './pages/CategoryItemspage';
+import CategoryItemsPage from './pages/CategoryItemsPage';
 import InsidePage from './pages/InsidePage';
 import OutSidePage from './pages/OutSidePage';
 
